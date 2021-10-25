@@ -1,4 +1,5 @@
 <template>
+  <audio ref="audio"></audio>
   <div class="player-container">
     <progress-bar></progress-bar>
     <div class="player">
