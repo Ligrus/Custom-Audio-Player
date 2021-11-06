@@ -1,5 +1,5 @@
 <template>
-  <Player msg="Welcome to Your Vue.js App"/>
+  <Player/>
 </template>
 
 <script>

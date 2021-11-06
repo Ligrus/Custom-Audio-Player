@@ -1,13 +1,27 @@
 <template>
-  <button class="play"></button>
-  <button class="pause"></button>
+  <button
+    @click="changeSongState(true)"
+    v-if="!isSongPlaying"
+    class="play"
+  ></button>
+  <button
+    @click="changeSongState(false)"
+    v-if="isSongPlaying"
+    class="pause"
+  ></button>
 </template>
 
 <script>
-
 export default {
-  name: 'Play',
-}
+  name: "Play",
+  props: ['isSongPlaying'],
+  methods: {
+    changeSongState(songState) {
+      console.log(this.isSongPlaying, "BBB");
+      this.$emit("song-state", songState);
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -21,9 +35,9 @@ button {
   height: 96px;
 }
 .play {
-  background-image: url('../../assets/images/controls/icons8-play-96.png');
+  background-image: url("../../assets/images/controls/icons8-play-96.png");
 }
 .pause {
-  background-image: url('../../assets/images/controls/icons8-pause-96.png');
+  background-image: url("../../assets/images/controls/icons8-pause-96.png");
 }
 </style>
