@@ -17,7 +17,6 @@ export default {
   props: ['isSongPlaying'],
   methods: {
     changeSongState(songState) {
-      console.log(this.isSongPlaying, "BBB");
       this.$emit("song-state", songState);
     },
   },

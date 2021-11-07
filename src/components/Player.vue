@@ -1,7 +1,7 @@
 <template>
-  <audio ref="audio"></audio>
+  <audio @timeupdate="updateSongTime" ref="audio"></audio>
   <div class="player-container">
-    <progress-bar></progress-bar>
+    <progress-bar :playedTime="songElapsedTime" @song-position-update="updateSongPosition"></progress-bar>
     <div class="player">
       <div class="player__cover">
         <cover :songCover="activePlayingSong.img"></cover>
@@ -29,41 +29,61 @@ export default {
         {
           img: "../assets/images/hey.jpg",
           name: "hey",
-          src: "assets/music/hey.mp3",
+          src: "music/hey.mp3",
         },
         {
           img: "../assets/images/summer.jpg",
           name: "summer",
-          src: "assets/music/summer.mp3",
+          src: "music/summer.mp3",
         },
         {
           img: "../assets/images/ukulele.jpg",
           name: "ukulele",
-          src: "assets/music/ukulele.mp3",
+          src: "music/ukulele.mp3",
         },
       ],
       activeSong: 0,
+      songElapsedTime: 0,
       isSongPlaying: false
     };
   },
   methods: {
     playSong(songState) {
       this.isSongPlaying = songState
+      const audioPlayer = this.$refs.audio;
+      console.log(audioPlayer)
       if (this.isSongPlaying) {
-        const audioPlayer = this.$refs.audio;
-        window.audioPLl = audioPlayer
-        audioPlayer.src = this.activePlayingSong.src;
-        audioPlayer.type = 'audio/mp3'
+        if (!audioPlayer.src) {
+          audioPlayer.src = this.activePlayingSong.src;
+          audioPlayer.type = 'audio/mp3'
+        }
         audioPlayer.play();
         return
       }
+      audioPlayer.pause();
     },
+    updateSongTime(e) {
+      this.songElapsedTime = (e.target.currentTime / e.target.duration) * 100
+    },
+    updateSongPosition(updatedPosition) {
+      this.songElapsedTime = updatedPosition
+      const audioPlayer = this.$refs.audio;
+      audioPlayer.currentTime = Math.round(audioPlayer.duration * updatedPosition)
+    }
   },
   computed: {
     activePlayingSong: function () {
       return this.songs[this.activeSong];
     },
   },
+   watch: {
+    songElapsedTime(value) {
+      if (value === 100) {
+        this.isSongPlaying = false
+        this.songElapsedTime = 0
+      }
+    }
+  }, 
   components: { ProgressBar, Cover, NextSong, Play },
   props: {
     msg: String,

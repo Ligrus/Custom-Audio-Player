@@ -3,8 +3,8 @@
     <div class="space-block"></div>
     <div class="progress-container">
       <h4>hello</h4>
-      <div class="progress-bar">
-        <div class="progress-bar-indicator"></div>
+      <div @click="changeSongTime($event)" class="progress-bar">
+        <div class="progress-bar-indicator" :style="{width: `${playedTime}%`}"></div>
       </div>
     </div>
   </div>
@@ -14,13 +14,20 @@
 export default {
   name: 'ProgressBar',
   props: {
-    next: {type: Boolean, default: false}
+    playedTime: {type: Number, default: 0}
+  },
+  methods: {
+    changeSongTime(e) {
+      const progressBarCoords = e.target.getBoundingClientRect()
+      const widthClickPosition = (e.x - progressBarCoords.left) / progressBarCoords.width
+      this.$emit("song-position-update", widthClickPosition);
+    }
   }
 }
 </script>
 
 <style scoped>
-
+ 
 h4 {
   margin: 0;
 }
@@ -52,7 +59,6 @@ h4 {
 
 .progress-bar {
   height: 4px;
-  width: 100%;
   background-color: gray;
   border-radius: 5px;
   margin-top: 10px;
