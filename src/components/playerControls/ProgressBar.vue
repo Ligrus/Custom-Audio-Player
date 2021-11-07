@@ -18,8 +18,9 @@ export default {
   },
   methods: {
     changeSongTime(e) {
-      const progressBarCoords = e.target.getBoundingClientRect()
+      const progressBarCoords = e.currentTarget.getBoundingClientRect()
       const widthClickPosition = (e.x - progressBarCoords.left) / progressBarCoords.width
+      console.log(widthClickPosition, progressBarCoords)
       this.$emit("song-position-update", widthClickPosition);
     }
   }

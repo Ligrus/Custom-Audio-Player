@@ -66,9 +66,9 @@ export default {
       this.songElapsedTime = (e.target.currentTime / e.target.duration) * 100
     },
     updateSongPosition(updatedPosition) {
-      this.songElapsedTime = updatedPosition
       const audioPlayer = this.$refs.audio;
-      audioPlayer.currentTime = Math.round(audioPlayer.duration * updatedPosition)
+      audioPlayer.currentTime = audioPlayer.duration * updatedPosition
+      this.songElapsedTime = updatedPosition
     }
   },
   computed: {
