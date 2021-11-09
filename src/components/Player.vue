@@ -7,9 +7,9 @@
         <cover :songCover="activePlayingSong.img"></cover>
       </div>
       <div class="player__controls">
-        <next-song></next-song>
+        <next-song @change-song="playPreviousSong" ></next-song>
         <play @song-state="playSong" :is-song-playing="isSongPlaying"></play>
-        <next-song next></next-song>
+        <next-song @change-song="playNextSong" next></next-song>
       </div>
     </div>
   </div>
@@ -50,17 +50,30 @@ export default {
   methods: {
     playSong(songState) {
       this.isSongPlaying = songState
-      const audioPlayer = this.$refs.audio;
-      console.log(audioPlayer)
       if (this.isSongPlaying) {
-        if (!audioPlayer.src) {
-          audioPlayer.src = this.activePlayingSong.src;
-          audioPlayer.type = 'audio/mp3'
-        }
-        audioPlayer.play();
+        this.$refs.audio.play();
         return
       }
-      audioPlayer.pause();
+      this.$refs.audio.pause();
+    },
+    playPreviousSong() {
+      if(this.activeSong === 0) {
+        return
+      }
+      this.activeSong = this.activeSong - 1
+      this.isSongPlaying = true
+      this.initAudio()
+      this.$refs.audio.play();
+    },
+    playNextSong() {
+      if(this.activeSong === this.songs.length - 1) {
+        return
+      }
+      this.activeSong = this.activeSong + 1
+      this.isSongPlaying = true
+      this.initAudio()
+      console.log(this.activePlayingSong, 'hhh', this.activeSong)
+      this.$refs.audio.play();
     },
     updateSongTime(e) {
       this.songElapsedTime = (e.target.currentTime / e.target.duration) * 100
@@ -68,8 +81,13 @@ export default {
     updateSongPosition(updatedPosition) {
       const audioPlayer = this.$refs.audio;
       audioPlayer.currentTime = audioPlayer.duration * updatedPosition
-      this.songElapsedTime = updatedPosition
-    }
+    },
+    initAudio() {
+      const audioPlayer = this.$refs.audio;
+      console.log(audioPlayer, 'FFF')
+      audioPlayer.src = this.activePlayingSong.src;
+      audioPlayer.type = 'audio/mp3'
+    },
   },
   computed: {
     activePlayingSong: function () {
@@ -83,7 +101,11 @@ export default {
         this.songElapsedTime = 0
       }
     }
-  }, 
+  },
+  mounted() {
+    this.initAudio()
+    // I'm text inside the component.
+  },
   components: { ProgressBar, Cover, NextSong, Play },
   props: {
     msg: String,

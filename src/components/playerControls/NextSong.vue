@@ -1,5 +1,5 @@
 <template>
-  <button :class="{'next-song': next, 'previous-song': !next}"></button>
+  <button @click="changesong" :class="{'next-song': next, 'previous-song': !next}"></button>
 </template>
 
 <script>
@@ -8,6 +8,11 @@ export default {
   name: 'NextSong',
   props: {
     next: {type: Boolean, default: false}
+  },
+  methods: {
+    changesong() {
+      this.$emit("change-song");
+    }
   }
 }
 </script>

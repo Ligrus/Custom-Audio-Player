@@ -20,7 +20,6 @@ export default {
     changeSongTime(e) {
       const progressBarCoords = e.currentTarget.getBoundingClientRect()
       const widthClickPosition = (e.x - progressBarCoords.left) / progressBarCoords.width
-      console.log(widthClickPosition, progressBarCoords)
       this.$emit("song-position-update", widthClickPosition);
     }
   }
