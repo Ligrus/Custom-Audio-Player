@@ -4,7 +4,7 @@
     <progress-bar :playedTime="songElapsedTime" @song-position-update="updateSongPosition"></progress-bar>
     <div class="player">
       <div class="player__cover">
-        <cover :songCover="activePlayingSong.img"></cover>
+        <cover :song-cover="activePlayingSong.img"></cover>
       </div>
       <div class="player__controls">
         <next-song @change-song="playPreviousSong" ></next-song>

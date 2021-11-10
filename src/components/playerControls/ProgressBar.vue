@@ -61,7 +61,7 @@ h4 {
 
 .progress-bar {
   height: 4px;
-  background-color: gray;
+  background-color: #bcbcbc;
   border-radius: 5px;
   margin-top: 10px;
   cursor: pointer;
@@ -71,7 +71,7 @@ h4 {
 .progress-bar-indicator {
   height: 100%;
   width: 100%;
-  background-color: red;
+  background: linear-gradient(to right, #da22ff, #9733ee);
   border-radius: 5px
 }
 

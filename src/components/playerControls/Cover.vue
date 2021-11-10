@@ -1,11 +1,17 @@
 <template>
-  <div class="cover second-song"><div class="center"></div></div>
+  <div  class="cover" :style="{background: `url:(${songCover})`}"><div class="center"></div></div>
 </template>
 
 <script>
 
 export default {
-  name: 'Cover'
+  name: 'Cover',
+  props: ['songCover'],
+  watch: {
+    songCover(value) {
+      console.log(value, 'COVER')
+    }
+  }
 }
 </script>
 
@@ -23,13 +29,5 @@ export default {
   top: -35%;
   left: 25%;
 }
-.first-song {
-  background-image: url("../../assets/images/hey.jpg");
-}
-.second-song {
-  background-image: url("../../assets/images/summer.jpg");
-}
-.third-song {
-  background-image: url("../../assets/images/ukulele.jpg");
-}
+
 </style>
