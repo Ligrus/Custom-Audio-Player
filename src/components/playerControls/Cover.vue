@@ -18,7 +18,10 @@ export default {
   border: none;
   height: 96px;
   width: 96px;
-  position: absolute
+  position: absolute;
+  border: 3px solid #cdc1c1;
+  top: -35%;
+  left: 25%;
 }
 .first-song {
   background-image: url("../../assets/images/hey.jpg");

@@ -36,8 +36,10 @@ h4 {
   display: flex;
   align-items: center;
   width: 27%;
+  max-width: 350px;
   height: 55px;
-  background-color: bisque;
+  background-color: rgba(255,255,255);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 12px 12px 0 0;
   top: -60%;
   left: 50%;

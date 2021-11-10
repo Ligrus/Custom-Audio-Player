@@ -128,6 +128,10 @@ export default {
   border-radius: 12px;
   width: 30%;
   display: flex;
+  max-width: 390px;
+  background-color: rgba(255,255,255);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1
 }
 .player__cover {
   position: relative;
