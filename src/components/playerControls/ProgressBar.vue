@@ -2,7 +2,7 @@
   <div class="container">
     <div class="space-block"></div>
     <div class="progress-container">
-      <h4>hello</h4>
+      <h4>{{name}}</h4>
       <div @click="changeSongTime($event)" class="progress-bar">
         <div class="progress-bar-indicator" :style="{width: `${playedTime}%`}"></div>
       </div>
@@ -14,7 +14,8 @@
 export default {
   name: 'ProgressBar',
   props: {
-    playedTime: {type: Number, default: 0}
+    playedTime: {type: Number, default: 0},
+    name: String
   },
   methods: {
     changeSongTime(e) {

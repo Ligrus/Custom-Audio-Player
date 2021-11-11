@@ -1,10 +1,10 @@
 <template>
   <audio @timeupdate="updateSongTime" ref="audio"></audio>
   <div class="player-container">
-    <progress-bar :playedTime="songElapsedTime" @song-position-update="updateSongPosition"></progress-bar>
+    <progress-bar :name="activePlayingSong.name" :playedTime="songElapsedTime" @song-position-update="updateSongPosition"></progress-bar>
     <div class="player">
       <div class="player__cover">
-        <cover :song-cover="activePlayingSong.img"></cover>
+        <cover :song-cover="activePlayingSong.img" :is-song-playing="isSongPlaying"></cover>
       </div>
       <div class="player__controls">
         <next-song @change-song="playPreviousSong" ></next-song>
