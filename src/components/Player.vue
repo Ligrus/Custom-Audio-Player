@@ -27,17 +27,17 @@ export default {
     return {
       songs: [
         {
-          img: "../assets/images/hey.jpg",
+          img: require("@/assets/images/hey.jpg"),
           name: "hey",
           src: "music/hey.mp3",
         },
         {
-          img: "../assets/images/summer.jpg",
+          img: require("@/assets/images/summer.jpg"),
           name: "summer",
           src: "music/summer.mp3",
         },
         {
-          img: "../assets/images/ukulele.jpg",
+          img: require("@/assets/images/ukulele.jpg"),
           name: "ukulele",
           src: "music/ukulele.mp3",
         },

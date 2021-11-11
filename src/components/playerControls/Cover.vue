@@ -1,5 +1,5 @@
 <template>
-  <div  class="cover" :style="{background: `url:(${songCover})`}"><div class="center"></div></div>
+  <div  class="cover" :style="{backgroundImage: `url(${songCover})`}"></div>
 </template>
 
 <script>
@@ -10,6 +10,11 @@ export default {
   watch: {
     songCover(value) {
       console.log(value, 'COVER')
+    }
+  },
+  methods: {
+    getBg() {
+      return  require(this.songCover);
     }
   }
 }
