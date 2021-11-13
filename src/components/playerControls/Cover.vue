@@ -1,22 +1,12 @@
 <template>
-  <div  class="cover" :style="{backgroundImage: `url(${songCover})`}"></div>
+  <div  class="cover" :style="{backgroundImage: `url(${songCover})`, animationPlayState: isSongPlaying ? 'running' : 'paused'}"></div>
 </template>
 
 <script>
 
 export default {
   name: 'Cover',
-  props: ['songCover'],
-  watch: {
-    songCover(value) {
-      console.log(value, 'COVER')
-    }
-  },
-  methods: {
-    getBg() {
-      return  require(this.songCover);
-    }
-  }
+  props: ['songCover', 'isSongPlaying']
 }
 </script>
 
@@ -33,6 +23,14 @@ export default {
   border: 3px solid #cdc1c1;
   top: -35%;
   left: 25%;
+  animation: rotate 3s linear infinite;
 }
-
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
 </style>

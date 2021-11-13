@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" :class="{'hidden-container': !isSongPlaying}">
     <div class="space-block"></div>
     <div class="progress-container">
       <h4>{{name}}</h4>
@@ -15,7 +15,8 @@ export default {
   name: 'ProgressBar',
   props: {
     playedTime: {type: Number, default: 0},
-    name: String
+    name: String,
+    isSongPlaying :Boolean
   },
   methods: {
     changeSongTime(e) {
@@ -45,6 +46,12 @@ h4 {
   top: -60%;
   left: 50%;
   transform: translateX(-50%);
+  transition: all 0.5s linear;
+}
+
+.hidden-container {
+  top: 0;
+  visibility: hidden
 }
 
 .space-block {

@@ -1,7 +1,7 @@
 <template>
   <audio @timeupdate="updateSongTime" ref="audio"></audio>
   <div class="player-container">
-    <progress-bar :name="activePlayingSong.name" :playedTime="songElapsedTime" @song-position-update="updateSongPosition"></progress-bar>
+    <progress-bar :name="activePlayingSong.name" :playedTime="songElapsedTime" @song-position-update="updateSongPosition" :is-song-playing="isSongPlaying"></progress-bar>
     <div class="player">
       <div class="player__cover">
         <cover :song-cover="activePlayingSong.img" :is-song-playing="isSongPlaying"></cover>
@@ -44,7 +44,8 @@ export default {
       ],
       activeSong: 0,
       songElapsedTime: 0,
-      isSongPlaying: false
+      isSongPlaying: false,
+      coverPosition: 0
     };
   },
   methods: {
@@ -72,7 +73,6 @@ export default {
       this.activeSong = this.activeSong + 1
       this.isSongPlaying = true
       this.initAudio()
-      console.log(this.activePlayingSong, 'hhh', this.activeSong)
       this.$refs.audio.play();
     },
     updateSongTime(e) {
@@ -84,7 +84,6 @@ export default {
     },
     initAudio() {
       const audioPlayer = this.$refs.audio;
-      console.log(audioPlayer, 'FFF')
       audioPlayer.src = this.activePlayingSong.src;
       audioPlayer.type = 'audio/mp3'
     },
@@ -104,7 +103,6 @@ export default {
   },
   mounted() {
     this.initAudio()
-    // I'm text inside the component.
   },
   components: { ProgressBar, Cover, NextSong, Play },
   props: {
